@@ -1,0 +1,476 @@
+@import 'tailwindcss';
+@import '@fontsource-variable/nunito';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --bg: #fbf6ee;
+  --surface: #ffffff;
+  --surface-2: #f4ede2;
+  --surface-3: #ece2d3;
+  --text: #3a3530;
+  --muted: #8a7f73;
+  --line: #eadfcf;
+  --accent: #4fa37e;
+  --accent-soft: #dff1e7;
+  --accent-ink: #ffffff;
+  --warm: #f2a65a;
+  --warm-soft: #fde9d4;
+  --energy: #ffc94a;
+  --energy-soft: #fff1c9;
+  --danger: #d9645f;
+  --danger-soft: #fbe1df;
+  --sky: #5b9ad9;
+  --sky-soft: #e0edfb;
+  --shadow: 0 2px 10px rgba(90, 70, 50, 0.08);
+  /* Chart tokens (validated with the dataviz palette checker against --surface). */
+  --viz-series: #2a78d6;
+  --viz-grid: #ece8e1;
+  --viz-axis: #cfc8bc;
+  --viz-ink: #3a3530;
+  --viz-muted: #8a7f73;
+  --mood-1: #d63e3e;
+  --mood-2: #f2a09d;
+  --mood-3: #ece9e3;
+  --mood-4: #86b6ef;
+  --mood-5: #2a78d6;
+  --mood-ink-1: #ffffff;
+  --mood-ink-2: #3a3530;
+  --mood-ink-3: #3a3530;
+  --mood-ink-4: #3a3530;
+  --mood-ink-5: #ffffff;
+  color-scheme: light;
+}
+
+.dark {
+  --bg: #1d1b21;
+  --surface: #28252d;
+  --surface-2: #312d37;
+  --surface-3: #3a3541;
+  --text: #f1ebe3;
+  --muted: #a79e93;
+  --line: #3e3845;
+  --accent: #7cc4a4;
+  --accent-soft: #28423a;
+  --accent-ink: #13231c;
+  --warm: #f4b37a;
+  --warm-soft: #4a3526;
+  --energy: #ffd166;
+  --energy-soft: #4a3f1f;
+  --danger: #ec8a84;
+  --danger-soft: #4a2826;
+  --sky: #8ab8ec;
+  --sky-soft: #243449;
+  --shadow: 0 2px 12px rgba(0, 0, 0, 0.35);
+  --viz-series: #3987e5;
+  --viz-grid: #37323d;
+  --viz-axis: #4a4450;
+  --viz-ink: #f1ebe3;
+  --viz-muted: #a79e93;
+  --mood-1: #ec7a78;
+  --mood-2: #9c4040;
+  --mood-3: #3a3640;
+  --mood-4: #2a5f9e;
+  --mood-5: #5598e7;
+  --mood-ink-1: #1d1b21;
+  --mood-ink-2: #f1ebe3;
+  --mood-ink-3: #f1ebe3;
+  --mood-ink-4: #f1ebe3;
+  --mood-ink-5: #1d1b21;
+  color-scheme: dark;
+}
+
+@theme inline {
+  --font-sans: 'Nunito Variable', ui-rounded, 'SF Pro Rounded', system-ui, sans-serif;
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+  --color-ink: var(--text);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-ink: var(--accent-ink);
+  --color-warm: var(--warm);
+  --color-warm-soft: var(--warm-soft);
+  --color-energy: var(--energy);
+  --color-energy-soft: var(--energy-soft);
+  --color-danger: var(--danger);
+  --color-danger-soft: var(--danger-soft);
+  --color-sky: var(--sky);
+  --color-sky-soft: var(--sky-soft);
+  --shadow-card: var(--shadow);
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+  overscroll-behavior-y: contain;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: default;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+input,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+.safe-top {
+  padding-top: env(safe-area-inset-top);
+}
+.safe-bottom {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+/* ------------------------------------------------------------------ birb animations */
+
+.birb-bob {
+  animation: bob 3.2s ease-in-out infinite;
+  transform-box: view-box;
+}
+@keyframes bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+.birb-blink {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: blink 5.5s infinite;
+}
+@keyframes blink {
+  0%,
+  93%,
+  100% {
+    transform: scaleY(1);
+  }
+  95% {
+    transform: scaleY(0.1);
+  }
+}
+
+.wing-left,
+.wing-right {
+  transform-box: fill-box;
+}
+.wing-left {
+  transform-origin: top right;
+}
+.wing-right {
+  transform-origin: top left;
+}
+.wing-left.flap {
+  animation: flapL 0.35s ease-in-out 4;
+}
+.wing-right.flap {
+  animation: flapR 0.35s ease-in-out 4;
+}
+@keyframes flapL {
+  50% {
+    transform: rotate(28deg);
+  }
+}
+@keyframes flapR {
+  50% {
+    transform: rotate(-28deg);
+  }
+}
+
+.pet-hop {
+  animation: hop 2.6s ease-in-out infinite;
+  transform-box: view-box;
+}
+@keyframes hop {
+  0%,
+  70%,
+  100% {
+    transform: translateY(0);
+  }
+  80% {
+    transform: translateY(-6px);
+  }
+  90% {
+    transform: translateY(0);
+  }
+}
+
+.float {
+  animation: floaty 3s ease-in-out infinite;
+}
+@keyframes floaty {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+.twinkle {
+  animation: twinkle 2.4s ease-in-out infinite;
+}
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+
+.flicker {
+  transform-box: fill-box;
+  transform-origin: bottom center;
+  animation: flicker 0.9s ease-in-out infinite alternate;
+}
+@keyframes flicker {
+  from {
+    transform: scale(1, 1);
+  }
+  to {
+    transform: scale(0.85, 1.12);
+  }
+}
+
+.lava {
+  animation: lava 6s ease-in-out infinite;
+}
+@keyframes lava {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-18px);
+  }
+}
+
+.egg-wobble {
+  transform-box: fill-box;
+  transform-origin: bottom center;
+  animation: wobble 2.4s ease-in-out infinite;
+}
+@keyframes wobble {
+  0%,
+  60%,
+  100% {
+    transform: rotate(0);
+  }
+  70% {
+    transform: rotate(-6deg);
+  }
+  80% {
+    transform: rotate(6deg);
+  }
+  90% {
+    transform: rotate(-3deg);
+  }
+}
+
+.wing-buzz {
+  transform-box: fill-box;
+  transform-origin: bottom center;
+  animation: buzz 0.15s linear infinite alternate;
+}
+@keyframes buzz {
+  to {
+    transform: scaleY(0.7);
+  }
+}
+
+.halo-float,
+.balloon-sway,
+.mobile-sway {
+  transform-box: fill-box;
+  transform-origin: bottom center;
+  animation: sway 4s ease-in-out infinite;
+}
+.mobile-sway {
+  transform-origin: top center;
+}
+@keyframes sway {
+  0%,
+  100% {
+    transform: rotate(-3deg);
+  }
+  50% {
+    transform: rotate(3deg);
+  }
+}
+
+.flame {
+  transform-box: fill-box;
+  transform-origin: top center;
+  animation: flicker 0.2s ease-in-out infinite alternate;
+}
+
+/* ------------------------------------------------------------------ ui animations */
+
+.heart-float {
+  animation: heartFloat 1.1s ease-out forwards;
+  pointer-events: none;
+}
+@keyframes heartFloat {
+  from {
+    opacity: 1;
+    transform: translate(-50%, 0) scale(0.6);
+  }
+  to {
+    opacity: 0;
+    transform: translate(-50%, -70px) scale(1.2);
+  }
+}
+
+.pop-in {
+  animation: popIn 0.35s cubic-bezier(0.2, 1.4, 0.4, 1) both;
+}
+@keyframes popIn {
+  from {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.slide-up {
+  animation: slideUp 0.28s cubic-bezier(0.2, 0.9, 0.3, 1) both;
+}
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.2s ease both;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.toast-in {
+  animation: toastIn 0.3s cubic-bezier(0.2, 1.2, 0.4, 1) both;
+}
+@keyframes toastIn {
+  from {
+    opacity: 0;
+    transform: translateY(-12px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.check-pop {
+  animation: checkPop 0.4s cubic-bezier(0.2, 1.6, 0.4, 1);
+}
+@keyframes checkPop {
+  0% {
+    transform: scale(0.6);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.confetti-piece {
+  position: absolute;
+  top: -10px;
+  width: 8px;
+  height: 12px;
+  border-radius: 2px;
+  animation: confetti 1.8s ease-in forwards;
+}
+@keyframes confetti {
+  to {
+    transform: translateY(110vh) rotate(720deg);
+    opacity: 0.6;
+  }
+}
+
+.breathe-circle {
+  transition: transform linear;
+}
+
+.shimmer {
+  background: linear-gradient(90deg, var(--energy) 0%, #ffe39a 50%, var(--energy) 100%);
+  background-size: 200% 100%;
+  animation: shimmer 2s linear infinite;
+}
+@keyframes shimmer {
+  to {
+    background-position: -200% 0;
+  }
+}
+
+.walk {
+  animation: walk 1.2s ease-in-out infinite;
+}
+@keyframes walk {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-2deg);
+  }
+  50% {
+    transform: translateY(-4px) rotate(2deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
