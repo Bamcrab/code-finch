@@ -2,6 +2,10 @@
 
 Personal, subscription-free Finch clone (self-care pet + home upkeep). Local-first PWA. See README.md for features and layout.
 
+## Deploy
+- Public repo `Bamcrab/code-finch`; GitHub Pages (Actions source) at https://bamcrab.github.io/code-finch/. Every push to `main` runs tests + build + deploy (`.github/workflows/deploy.yml`), so `main` is production.
+- Repo-local `user.email` is the GitHub noreply address — keep it that way so the personal email never lands in public history.
+
 ## Commands
 - `npm run dev` (launch config `finch-dev` serves on 5178), `npm test`, `npm run build` (runs `tsc -b` first), `npm run icons` (regenerates PWA PNGs from the SVG in scripts/make-icons.mjs).
 

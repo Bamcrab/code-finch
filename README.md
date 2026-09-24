@@ -68,7 +68,11 @@ npm run preview    # serve the production build locally
 
 ## Using it on your phone
 
-A PWA needs HTTPS to install and work offline. Build it, then host `dist/` on any static host, e.g. GitHub Pages, Netlify Drop, or Cloudflare Pages. It uses relative paths and hash routing, so any sub-path works. Open the URL on your phone and choose **Add to Home Screen**.
+**Live at https://bamcrab.github.io/code-finch/**. Open it on your phone and choose **Add to Home Screen** (iOS: Share → Add to Home Screen; Android/Chrome: menu → Install app). It then works offline.
+
+Every push to `main` runs the tests, builds, and redeploys via `.github/workflows/deploy.yml`. Installed copies pick up the new version the next time they're opened. Your data isn't affected, since it lives on the device, not the site.
+
+To host it elsewhere instead, serve `dist/` from any static HTTPS host. It uses relative paths and hash routing, so any sub-path works.
 
 For a quick look over your LAN (no offline or install), run `npm run dev -- --host` and open the printed network URL.
 
